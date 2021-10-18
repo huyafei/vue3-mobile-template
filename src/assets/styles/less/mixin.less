@@ -1,0 +1,42 @@
+
+//圆角
+.border--radius(@radius: 16px) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  -ms-border-radius: @radius;
+  -o-border-radius: @radius;
+  border-radius: @radius;
+}
+//不可用状态
+.disabled(@bgColor:#e6e6e6, @textColor:#ababab){
+  background-color: @bgColor !important;
+  color: @textColor !important;
+  cursor: not-allowed !important;
+}
+//绝对居中(相对于固定宽高的容器)
+.absolute-center(@width, @height){
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -(@width / 2);
+  margin-top: -(@height / 2);
+  width: @width;
+  height: @height;
+}
+
+
+.ellipsis(@rowCount: 1) when (@rowCount<=1){
+  // 单行文本溢出
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ellipsis(@rowCount: 1) when (@rowCount>1){
+  // 多行文本溢出
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  word-break: break-all; // 允许在单词内换行。
+  -webkit-line-clamp: @rowCount; // 限制在一个块元素显示的文本的行数。
+  -webkit-box-orient: vertical; // 设置或检索伸缩盒对象的子元素的排列方式
+}
