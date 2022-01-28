@@ -8,10 +8,18 @@ const routes = [...other, ...main];
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
+  // 滚动行为
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    } else {
+      return { x: 0, y: 0 };
+    }
+  },
 });
 
 router.beforeEach(async (to, from, next) => {
-  if (["Login", "404", "401"].includes(to.name)) {
+  if (["Login", "Page404", "Page401"].includes(to.name)) {
     next();
   } else {
     if (from.name == null) {

@@ -1,5 +1,7 @@
 <template>
-  <router-view v-if="isRouterAlive" />
+  <div id="app">
+    <router-view v-if="isRouterAlive" />
+  </div>
 </template>
 <script>
 export default {
@@ -28,6 +30,10 @@ export default {
 <style lang="less">
 #app {
   height: 100%;
-  overflow: auto;
+  height: calc(100% - constant(safe-area-inset-top));
+  height: calc(100% - env(safe-area-inset-top));
+  padding-top: constant(safe-area-inset-top);
+  padding-top: env(safe-area-inset-top);
+  overflow: hidden;
 }
 </style>
