@@ -2,7 +2,6 @@ import axios from "axios";
 import Cookies from "./cookie";
 import { Dialog, Toast } from "vant";
 import router from "../router/index";
-import login from "@/views/login";
 
 axios.defaults.baseURL = process.env.VUE_APP_baseUrl;
 
