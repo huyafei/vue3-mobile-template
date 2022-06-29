@@ -59,9 +59,9 @@ export default {
       userInfo: computed(() => store.state.user.userInfo),
       userInfoGetter: computed(() => store.getters.user.userInfo),
       // 使用 mutation
-      setUserInfo: () => store.commit("user/SET_USERINFO"),
+      sc_user_SET_USERINFO: () => store.commit("user/SET_USERINFO"),
       // 使用 action
-      asyncGetUserInfo: () => store.dispatch("user/getUserInfo"),
+      sc_user_getUserInfo: () => store.dispatch("user/getUserInfo"),
     };
   },
 };

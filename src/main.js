@@ -2,15 +2,13 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-const app = createApp(App);
 import "lib-flexible";
-
-import axios from "./utils/axios";
-// import Cookies from "js-cookie";
-import momment from "moment";
+// import axios from "./utils/axios";
+// import Cookies from "@/utils/cookie";
+// import momment from "moment";
 import vConsole from "vconsole";
-// import * as echarts from "echarts";
 
+// import * as echarts from "echarts";
 import * as filters from "./filters"; // global filters
 import * as componetns from "./components";
 
@@ -24,29 +22,41 @@ import "./assets/styles/css/reset.css";
  */
 import "./assets/styles/less/index.less";
 
-import { Button, Tabbar, TabbarItem } from "vant";
-app.use(Button).use(Tabbar).use(TabbarItem);
+/**
+ * vant
+ */
+import { Button, Search, Tabbar, TabbarItem } from "vant";
+
+const app = createApp(App);
+
+app.use(Button)
+  .use(Search)
+  .use(Tabbar)
+  .use(TabbarItem);
 
 // 调接口可以去掉
 if (process.env.NODE_ENV === "development") {
   require("../mock");
 }
+
 if (["dev", "uat"].includes(process.env.VUE_APP_env)) {
   app.config.globalProperties.$vConsole = new vConsole();
 }
 
 app.config.globalProperties = {
-  $axios: axios,
+  // $axios: axios,
   // $cookies: Cookies,
-  $momment: momment,
-  // $echarts: echarts,
+  // $momment: momment,
+  // $echarts: echarts
 };
+
 // 注册全局过滤器
 let newsFilters = {};
 Object.keys(filters).forEach((key) => {
   newsFilters[key] = filters[key];
 });
 app.config.globalProperties.$filters = Object.assign({}, newsFilters);
+
 // 注册全局组件
 Object.keys(componetns).forEach((key) => {
   app.component(componetns[key].name, componetns[key]);

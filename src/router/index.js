@@ -22,17 +22,18 @@ router.beforeEach(async (to, from, next) => {
   if (["Login", "Page404", "Page401"].includes(to.name)) {
     next();
   } else {
-    if (from.name == null) {
-      //刷新页面重新登陆，更新权限
-      next({
-        name: "Login",
-        query: {
-          redirect: to.fullPath,
-        },
-      });
-    } else {
+    // 刷新页面重新登陆，更新权限
+    // if (!from.name && to.name !== "Login") {
+
+    //   next({
+    //     name: "Login",
+    //     query: {
+    //       redirect: to.fullPath,
+    //     },
+    //   });
+    // } else {
       const token = cookies.get("token");
-      if (token && token !== "undefined") {
+      if (token) {
         next();
       } else {
         next({
@@ -42,7 +43,7 @@ router.beforeEach(async (to, from, next) => {
           },
         });
       }
-    }
+    // }
   }
 });
 router.afterEach((to) => {
